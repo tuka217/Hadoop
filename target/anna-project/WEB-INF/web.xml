@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+    <display-name>Simple App</display-name>
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>simple</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>simple</servlet-name>
+        <url-pattern>/anna-1.0-SNAPSHOT/*</url-pattern>
+    </servlet-mapping>
+    <!--<session-config>-->
+        <!--<session-timeout>-->
+            <!--3000-->
+        <!--</session-timeout>-->
+    <!--</session-config>-->
+
+
+    <listener>
+        <listener-class>org.apache.ignite.startup.servlet.ServletContextListenerStartup</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>IgniteWebSessionsFilter</filter-name>
+        <filter-class>org.apache.ignite.cache.websession.WebSessionFilter</filter-class>
+    </filter>
+
+    <!-- You can also specify a custom URL pattern. -->
+    <filter-mapping>
+        <filter-name>IgniteWebSessionsFilter</filter-name>
+        <url-pattern>/anna-1.0-SNAPSHOT/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Specify Ignite configuration (relative to META-INF folder or Ignite_HOME). -->
+    <context-param>
+        <param-name>IgniteConfigurationFilePath</param-name>
+        <param-value>/home/anna/Downloads/apache-ignite-2.4.0-src/config/default-config.xml </param-value>
+    </context-param>
+
+    <!-- Specify the name of Ignite cache for web sessions. -->
+    <context-param>
+        <param-name>IgniteWebSessionsCacheName</param-name>
+        <param-value>replicated</param-value>
+    </context-param>
+</web-app>
